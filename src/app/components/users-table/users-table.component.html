@@ -1,0 +1,19 @@
+<p>users-table works!</p>
+<table>
+    <thead>
+        <tr>
+            <th (click)="sort('name')">Name</th>
+            <th (click)="sort('email')">Email</th>
+            <th (click)="sort('phone')">Phone</th>
+            <th (click)="sort('website')">Website</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users" (dblclick)="onRowDoubleClick(user)">
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.phone }}</td>
+            <td><a [href]="user.website" target="_blank">{{ user.website }}</a></td>
+        </tr>
+    </tbody>
+</table>
