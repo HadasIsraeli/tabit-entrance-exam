@@ -16,6 +16,8 @@ export class UsersTableComponent implements OnInit {
   users: User[] = [];
   columnSorting: string = '';
   AscendingSort: boolean = true;
+  lastTapTime: number = 0;
+
 
   constructor(
     private dataService: DataServiceService,
@@ -54,7 +56,8 @@ export class UsersTableComponent implements OnInit {
 
   onRowDoubleClick(user: User): void {
     const dialogRef = this.dialog.open(UserDetailsEditComponent, {
-      width: '300px',
+      width: '600px',
+      height: '300px',
       data: user
     });
 
@@ -68,4 +71,14 @@ export class UsersTableComponent implements OnInit {
     });
   }
 
+  onRowClick(user: User): void {
+    const currentTime = new Date().getTime();
+    const tapInterval = currentTime - this.lastTapTime;
+
+    if (tapInterval < 300 && window.innerWidth <= 600) { // Double-tap detected
+      this.onRowDoubleClick(user);
+    }
+
+    this.lastTapTime = currentTime;
+  }
 }

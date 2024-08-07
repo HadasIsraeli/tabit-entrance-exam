@@ -5,3 +5,20 @@ table {
 th {
     cursor: pointer;
 }
+
+.modal-dialog {
+    max-width: 800px;
+    margin: 1.75rem auto;
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-footer {
+    padding: 1rem;
+}
+
+.is-invalid {
+    border-color: #dc3545;
+}

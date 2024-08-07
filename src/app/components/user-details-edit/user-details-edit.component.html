@@ -1,17 +1,28 @@
-<h2>Edit User</h2>
-<form [formGroup]="userForm" (ngSubmit)="onSave()">
-    <label for="name">Name:</label>
-    <input id="name" formControlName="name" />
-
-    <label for="phone">Phone:</label>
-    <input id="phone" formControlName="phone" />
-
-    <label for="website">Website:</label>
-    <input id="website" formControlName="website" />
-
-    <label for="email">Email:</label>
-    <input id="email" formControlName="email" disabled />
-
-    <button type="submit" (click)="onSave()">Save</button>
-    <button type="button" (click)="onCancel()">Cancel</button>
+<div class="modal-header">
+    <h2 class="modal-title">User Details</h2>
+</div>
+<form class="form-card" [formGroup]="userForm" (ngSubmit)="onSave()">
+    <div class="form-group">
+        <label class="lable" for="name">Name:</label>
+        <input class="input-field" id="name" formControlName="name" required
+            [ngClass]="{'is-invalid': userForm.controls['name'].invalid}" />
+    </div>
+    <div class="form-group">
+        <label class="lable" for="phone">Phone:</label>
+        <input class="input-field" id="phone" formControlName="phone" required maxlength="12"
+            [ngClass]="{'is-invalid': userForm.controls['phone'].invalid}" />
+    </div>
+    <div class="form-group">
+        <label class="lable" for="website">Website:</label>
+        <input class="input-field" id="website" formControlName="website"
+            [ngClass]="{'is-invalid': userForm.controls['website'].invalid}" />
+    </div>
+    <div class="form-group">
+        <label class="lable" for="email">Email:</label>
+        <input class="input-field" id="email" formControlName="email" />
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-secondary" type="button" (click)="onClose()">Close</button>
+    </div>
 </form>

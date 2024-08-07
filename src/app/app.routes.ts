@@ -3,4 +3,6 @@ import { UsersTableComponent } from './components/users-table/users-table.compon
 
 export const routes: Routes = [
     { path: '', component: UsersTableComponent },
+    { path: '**', component: UsersTableComponent },
+
 ];
