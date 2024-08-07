@@ -22,7 +22,7 @@ export class UserDetailsEditComponent {
   ) {
     this.userForm = this.fb.group({
       name: [data.name, [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]],
-      phone: [data.phone, [Validators.required, Validators.pattern(/^\+9725[0-9]{7}$/)]],
+      phone: [data.phone, [Validators.required, Validators.pattern(/^\+9725[0-9]{8}$/)]],
       website: [data.website, [Validators.pattern(/^(https?:\/\/)?([\w\d-]+\.)+[\w]{2,}(\/.+)?$/)]],
       email: [{ value: data.email, disabled: true }]
     });

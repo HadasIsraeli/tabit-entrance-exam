@@ -1,9 +1,31 @@
-table {
-    width: 100%;
+.modal-header {
+    background-color: #0f5853;
+    color: #ffffff;
+    padding: 16px;
+    border-bottom: 1px solid #dee2e6;
 }
 
-th {
-    cursor: pointer;
+.modal-title {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.form-group {
+    margin: 0px 16px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.input-field:focus {
+    border-color: #80bdff;
+    outline: none;
 }
 
 .modal-dialog {
@@ -16,9 +38,52 @@ th {
 }
 
 .modal-footer {
-    padding: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px;
+    border-top: 1px solid #dee2e6;
 }
 
-.is-invalid {
+.btn {
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+.btn-secondary {
+    background-color: #ba1a1a;
+    border-color: #ba1a1a;
+    color: #ffffff;
+}
+
+.btn-secondary:hover {
+    background-color: #565e64;
+    border-color: #494e53;
+}
+
+.is-invalid,
+.input-field.ng-invalid.ng-touched {
     border-color: #dc3545;
+}
+
+.input-field.ng-valid.ng-touched {
+    border-color: #28a745;
+}
+
+.is-invalid-btn {
+    color: #020203;
+    background-color: #565e64;
+    border: #565e64;
 }

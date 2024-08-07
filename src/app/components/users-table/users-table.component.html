@@ -1,7 +1,5 @@
 <div class="title-content">
-    <div class="left-side">
-        <h1>Tabit Users</h1>
-    </div>
+    <h1>Tabit Users</h1>
 </div>
 <div class="table-responsive">
     <table class="table table-striped table-bordered">
@@ -26,7 +24,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let user of users" (dblclick)="onRowDoubleClick(user)" (click)="onRowClick(user)">
+            <tr *ngFor="let user of users" (click)="onRowClick(user)">
                 <td data-label="Name">{{ user.name }}</td>
                 <td data-label="Email">{{ user.email }}</td>
                 <td data-label="Phone">{{ user.phone }}</td>

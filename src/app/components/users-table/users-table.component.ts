@@ -75,7 +75,7 @@ export class UsersTableComponent implements OnInit {
     const currentTime = new Date().getTime();
     const tapInterval = currentTime - this.lastTapTime;
 
-    if (tapInterval < 300 && window.innerWidth <= 600) { // Double-tap detected
+    if (tapInterval < 300) { // Double-tap detected
       this.onRowDoubleClick(user);
     }
 

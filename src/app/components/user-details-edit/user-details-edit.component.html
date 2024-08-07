@@ -6,11 +6,15 @@
         <label class="lable" for="name">Name:</label>
         <input class="input-field" id="name" formControlName="name" required
             [ngClass]="{'is-invalid': userForm.controls['name'].invalid}" />
+        <p class="invalid-data" *ngIf="userForm.controls['name'].invalid">invalid Name, use English characters only</p>
+
     </div>
     <div class="form-group">
         <label class="lable" for="phone">Phone:</label>
-        <input class="input-field" id="phone" formControlName="phone" required maxlength="12"
-            [ngClass]="{'is-invalid': userForm.controls['phone'].invalid}" />
+        <input class="input-field" id="phone" formControlName="phone" required maxlength="13"
+            placeholder="+9725xxxxxxxx" [ngClass]="{'is-invalid': userForm.controls['phone'].invalid}" />
+        <p class="invalid-data" *ngIf="userForm.controls['phone'].invalid">invalid Phone, please enter a valid Israels
+            phone number as folow +9725xxxxxxxx</p>
     </div>
     <div class="form-group">
         <label class="lable" for="website">Website:</label>
@@ -22,7 +26,9 @@
         <input class="input-field" id="email" formControlName="email" />
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-primary" type="submit"
+            disabled="userForm.controls['website'].invalid||userForm.controls['phone'].invalid||userForm.controls['name'].invalid"
+            [ngClass]="{'is-invalid-btn': userForm.controls['website'].invalid||userForm.controls['phone'].invalid||userForm.controls['name'].invalid}">Save</button>
         <button class="btn btn-secondary" type="button" (click)="onClose()">Close</button>
     </div>
 </form>
