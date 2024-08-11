@@ -2,34 +2,39 @@
     <h1>Tabit Users</h1>
 </div>
 <div class="table-responsive">
-    <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th (click)="sort('name')">
-                    <i class="fa-solid fa-user"></i>
-                    Name
-                </th>
-                <th (click)="sort('email')">
-                    <i class="fa-solid fa-at"></i>
-                    Email
-                </th>
-                <th (click)="sort('phone')">
-                    <i class="fa-solid fa-phone"></i>
-                    Phone
-                </th>
-                <th (click)="sort('website')">
-                    <i class="fa-solid fa-link"></i>
-                    Website
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let user of users" (click)="onRowClick(user)">
-                <td data-label="Name">{{ user.name }}</td>
-                <td data-label="Email">{{ user.email }}</td>
-                <td data-label="Phone">{{ user.phone }}</td>
-                <td data-label="Website"><a [href]="user.website" target="_blank">{{ user.website }}</a></td>
-            </tr>
-        </tbody>
+    <table mat-table [dataSource]="dataSource" class="table">
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef (click)="sort('name')" class="table-head">
+                <i class="fa-solid fa-user"></i> Name
+            </th>
+            <td mat-cell *matCellDef="let user" [attr.data-label]="'Name'">{{ user.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef (click)="sort('email')">
+                <i class="fa-solid fa-at"></i> Email
+            </th>
+            <td mat-cell *matCellDef="let user" [attr.data-label]="'Email'">{{ user.email }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef (click)="sort('phone')">
+                <i class="fa-solid fa-phone"></i> Phone
+            </th>
+            <td mat-cell *matCellDef="let user" [attr.data-label]="'Phone'">{{ user.phone }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="website">
+            <th mat-header-cell *matHeaderCellDef (click)="sort('website')">
+                <i class="fa-solid fa-link"></i> Website
+            </th>
+            <td mat-cell *matCellDef="let user" [attr.data-label]="'Website'">
+                <a [href]="user.website" target="_blank">{{ user.website }}</a>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClick(row)"></tr>
     </table>
 </div>
