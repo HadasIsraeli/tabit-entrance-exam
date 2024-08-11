@@ -7,9 +7,12 @@
     font-weight: bold;
 }
 
+.table-responsive {
+    margin: 10px;
+}
+
 .table {
-    width: 80%;
-    margin: 20px;
+    width: 75%;
     border-collapse: collapse;
     border-radius: 8px;
     overflow: hidden;
@@ -18,7 +21,7 @@
 
 .table th,
 .table td {
-    padding: 10px;
+    padding: 5px 10px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
@@ -28,6 +31,7 @@
     cursor: pointer;
     color: #ffffff;
     font-weight: 500;
+    padding: 20px 10px;
 }
 
 .table tr:nth-child(even) {
@@ -36,18 +40,17 @@
 
 @media (max-width: 600px) {
     .table {
-        display: block;
+        display: flex;
         width: 100%;
-        margin: 10px;
     }
 
-    .table thead {
+    .table th,
+    .thead {
         display: none;
     }
 
     .table tbody,
     .table tr,
-    .table th,
     .table td {
         display: block;
         text-align: left;
@@ -57,14 +60,16 @@
         margin: 0 0 1rem 0;
         border: 1px solid #ddd;
         border-radius: 8px;
+        height: auto;
     }
-
 
     .table td {
         border: none;
         position: relative;
         padding-left: 40%;
         white-space: nowrap;
+        min-width: 300px;
+        background-color: rgba(217, 239, 238, 0.068);
     }
 
     .table td:before {

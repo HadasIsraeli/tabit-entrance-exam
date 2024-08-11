@@ -37,15 +37,12 @@ export class UsersTableComponent implements OnInit {
   }
 
   sort(column: string): void {
-    console.log('sort click', column);
-
     if (this.columnSorting === column) {
       this.AscendingSort = !this.AscendingSort;
     } else {
       this.columnSorting = column;
       this.AscendingSort = true;
     }
-
     this.users.sort((a: any, b: any) => {
       let valueA = a[column];
       let valueB = b[column];
@@ -78,7 +75,6 @@ export class UsersTableComponent implements OnInit {
       height: '300px',
       data: user
     });
-
     dialogRef.afterClosed().subscribe((result: User) => {
       if (result) {
         const index = this.users.findIndex(u => u.id === result.id);
@@ -93,11 +89,9 @@ export class UsersTableComponent implements OnInit {
   onRowClick(user: User): void {
     const currentTime = new Date().getTime();
     const tapInterval = currentTime - this.lastTapTime;
-
-    if (tapInterval < 300) { // Double-tap detected
+    if (tapInterval < 300) {
       this.onRowDoubleClick(user);
     }
-
     this.lastTapTime = currentTime;
   }
 }
