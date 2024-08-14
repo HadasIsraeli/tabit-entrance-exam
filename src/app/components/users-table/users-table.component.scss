@@ -38,6 +38,10 @@
     background-color: #f9f9f9;
 }
 
+.table th.mat-sort-header-sorted {
+    color: black;
+}
+
 @media (max-width: 600px) {
     .table {
         display: flex;
@@ -45,7 +49,8 @@
     }
 
     .table th,
-    .thead {
+    .thead,
+    .pagination {
         display: none;
     }
 

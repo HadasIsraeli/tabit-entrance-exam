@@ -6,15 +6,18 @@
         <label class="lable" for="name">Name:</label>
         <input class="input-field" id="name" formControlName="name" required
             [ngClass]="{'is-invalid': userForm.controls['name'].invalid}" />
-        <p class="invalid-data" *ngIf="userForm.controls['name'].invalid">invalid Name, use English characters only</p>
-
+        <p class="invalid-data" *ngIf="userForm.controls['name'].hasError('pattern')">invalid Name, use English
+            characters only</p>
+        <p class="invalid-data" *ngIf="userForm.controls['name'].hasError('required')">required Name</p>
     </div>
     <div class="form-group">
         <label class="lable" for="phone">Phone:</label>
         <input class="input-field" id="phone" formControlName="phone" required maxlength="13"
             placeholder="+9725xxxxxxxx" [ngClass]="{'is-invalid': userForm.controls['phone'].invalid}" />
-        <p class="invalid-data" *ngIf="userForm.controls['phone'].invalid">invalid Phone, please enter a valid Israels
+        <p class="invalid-data" *ngIf="userForm.controls['phone'].hasError('pattern')">invalid Phone, please enter a
+            valid Israels
             phone number as folow +9725xxxxxxxx</p>
+        <p class="invalid-data" *ngIf="userForm.controls['phone'].hasError('required')">required Phone</p>
     </div>
     <div class="form-group">
         <label class="lable" for="website">Website:</label>

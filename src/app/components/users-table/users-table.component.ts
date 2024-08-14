@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { DataServiceService, User } from '../../services/data/data-service.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { UserDetailsEditComponent } from '../user-details-edit/user-details-edit.component';
 import { CommonModule } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-users-table',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, MatTableModule],
+  imports: [CommonModule, MatDialogModule, MatTableModule, MatPaginatorModule, MatSortModule],
   templateUrl: './users-table.component.html',
   styleUrl: './users-table.component.scss'
 })
 
-export class UsersTableComponent implements OnInit {
+export class UsersTableComponent implements OnInit, AfterViewInit {
   users: User[] = [];
   columnSorting: string = '';
   AscendingSort: boolean = true;
@@ -22,9 +25,13 @@ export class UsersTableComponent implements OnInit {
   displayedColumns: string[] = ['name', 'email', 'phone', 'website'];
   dataSource: MatTableDataSource<User> = new MatTableDataSource<User>([]);
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
   constructor(
     private dataService: DataServiceService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private _liveAnnouncer: LiveAnnouncer
   ) { }
 
   ngOnInit(): void {
@@ -33,46 +40,29 @@ export class UsersTableComponent implements OnInit {
         this.users = users;
         this.dataSource.data = users;
       },
-      err => { console.error('error fetching users', err); })
+      err => { console.error('error fetching users', err); });
   }
 
-  sort(column: string): void {
-    if (this.columnSorting === column) {
-      this.AscendingSort = !this.AscendingSort;
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+
+
+  announceSortChange(sortState: Sort) {
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
     } else {
-      this.columnSorting = column;
-      this.AscendingSort = true;
+      this._liveAnnouncer.announce('Sorting cleared');
     }
-    this.users.sort((a: any, b: any) => {
-      let valueA = a[column];
-      let valueB = b[column];
-
-      if (valueA < valueB) {
-        return this.AscendingSort ? -1 : 1;
-      } else if (valueA > valueB) {
-        return this.AscendingSort ? 1 : -1;
-      } else {
-        return 0;
-      }
-    });
-    this.dataSource.data = this.dataSource.data.sort((a: any, b: any) => {
-      let valueA = a[column];
-      let valueB = b[column];
-
-      if (valueA < valueB) {
-        return this.AscendingSort ? -1 : 1;
-      } else if (valueA > valueB) {
-        return this.AscendingSort ? 1 : -1;
-      } else {
-        return 0;
-      }
-    });
   }
 
   onRowDoubleClick(user: User): void {
     const dialogRef = this.dialog.open(UserDetailsEditComponent, {
       width: '600px',
-      height: '300px',
+      height: '500px',
+      disableClose: true,
       data: user
     });
     dialogRef.afterClosed().subscribe((result: User) => {
